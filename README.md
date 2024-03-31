@@ -69,7 +69,13 @@ kubectl apply -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manif
 kubectl apply -f https://raw.githubusercontent.com/anton264/homelab/main/argocd/argocd-cm.yaml
 kubectl apply -f https://raw.githubusercontent.com/anton264/homelab/main/argocd/argocd-rbac-cm.yaml
 kubectl apply -f https://raw.githubusercontent.com/anton264/homelab/main/argocd/argocdingress.yaml
-kubectl apply -f https://github.com/anton264/homelab/appOfApp/templates
+kubectl apply -f https://github.com/anton264/homelab/appOfApp/templates/all.yaml
+until kubectl apply -f https://github.com/anton264/homelab/appOfApp/templates/metallbobjects.yaml
+do
+  echo "Waiting for metallb.."
+  sleep 5
+done
+
 
 sleep 180
 k -n argocd rollout restart deployment
