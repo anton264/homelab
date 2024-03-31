@@ -1,4 +1,5 @@
 # additional resources like ingress rules, cluster and repository secrets.
+namespace: argocd
 resources:
 - https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/ha/install.yaml
 - argoingress.yaml
