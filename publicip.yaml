@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: public-ip-config
+  namespace: externaldns
+data:
+  public-ip: ""
+
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: public-ip-cronjob
+  namespace: externaldns
+spec:
+  schedule: "*/10 * * * *" # Run every 10 minutes
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          serviceAccountName: default
+          containers:
+            - name: get-public-ip
+              image: quay.io/appuio/oc:v4.12
+              # Patch the configmap by checking the external ip, if the configmap is updated externaldns-deployment will be restarted
+              command:
+                [
+                  "sh",
+                  "-c",
+                  'kubectl patch configmap -n externaldns public-ip-config -p "{\"data\":{\"public-ip\":\"$(curl ifconfig.me)\"}}"  | grep "no change" || kubectl -n externaldns rollout restart deployment',
+                ]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: configmap-updater-role
+  namespace: externaldns
+rules:
+  - apiGroups: ["", "apps"]
+    resources: ["configmaps", "deployments", "replicasets", "pods"]
+    verbs: ["get", "patch", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: configmap-updater-rolebinding
+  namespace: externaldns
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: configmap-updater-role
+subjects:
+  - kind: ServiceAccount
+    name: default

@@ -1,0 +1,9 @@
+# additional resources like ingress rules, cluster and repository secrets.
+resources:
+- https://raw.githubusercontent.com/argoproj/argo-cd/master/manifests/ha/install.yaml
+- argoingress.yaml
+
+# changes to config maps
+patches:
+- path: argocd-cm.yaml
+- path: argocd-rbac-cm.yaml

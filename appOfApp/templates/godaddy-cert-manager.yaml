@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: godaddy-cert-manager
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://snowdrop.github.io/godaddy-webhook'
+    targetRevision: 0.3.0
+    helm:
+      parameters:
+        - name: groupName
+          value: eriksmo.top
+    chart: godaddy-webhook
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: cert-manager
+  syncPolicy:
+    automated: {}    
