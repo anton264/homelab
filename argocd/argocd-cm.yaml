@@ -8,7 +8,7 @@ data:
         name: GitHub
         config:
           clientID: 0587817c265bc2e329cc
-          clientSecret: $dex.github.clientSecret # Alternatively $<some_K8S_secret>:dex.github.clientSecret
+          clientSecret: $github-client-secret:dex.github.clientSecret # Alternatively $<some_K8S_secret>:dex.github.clientSecret
           orgs:
           - name: "240snusn"
   server.insecure: "true"

@@ -10,11 +10,17 @@ sudo k0s start
 sleep 120
 sudo cp /var/lib/k0s/pki/admin.conf .kube/config
 chmod 600 .kube/config
+k get nodes
+
 kubectl create ns externaldns
 kubectl create ns cert-manager
 kubectl create ns argocd
 kubectl apply -f https://raw.githubusercontent.com/anton264/homelab/main/publicip.yaml
 
+kubectl -n externaldns create job --from=cronjob/public-ip-cronjob firstjob
+kubectl -n externaldns wait --for=condition=complete job/firstjob
+kubectl -n externaldns delete job firstjob
+k -n externaldns get configmap public-ip-config -o jsonpath={.data.public-ip}
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -24,7 +30,7 @@ metadata:
   namespace: argocd
 type: Opaque
 stringData:
-  dex.github.clientSecret: 0f458bed99dc52ef76e856a6cfc4419e1861b49a
+  dex.github.clientSecret: ${GITHUBCLIENTSECRET}
 
 EOF
 
@@ -36,9 +42,9 @@ metadata:
   namespace: externaldns
 type: Opaque
 stringData:
-  token: ${GODADDY-API-KEY}:${GODADDY-API-SECRET}
-  godaddy-api-key: ${GODADDY-API-KEY}
-  godaddy-api-secret: ${GODADDY-API-SECRET}
+  token: ${GODADDYAPIKEY}:${GODADDYAPISECRET}
+  GODADDYAPIKEY: ${GODADDYAPIKEY}
+  GODADDYAPISECRET: ${GODADDYAPISECRET}
 
 EOF
 
@@ -50,9 +56,9 @@ metadata:
   namespace: cert-manager
 type: Opaque
 stringData:
-  token: ${GODADDY-API-KEY}:${GODADDY-API-SECRET}
-  godaddy-api-key: ${GODADDY-API-KEY}
-  godaddy-api-secret: ${GODADDY-API-SECRET}
+  token: ${GODADDYAPIKEY}:${GODADDYAPISECRET}
+  GODADDYAPIKEY: ${GODADDYAPIKEY}
+  GODADDYAPISECRET: ${GODADDYAPISECRET}
 
 EOF
 
