@@ -93,3 +93,9 @@ set protocols bgp 64512 maximum-paths ibgp 32
 commit
 save
 exit
+
+### Teardown
+
+```sh
+sudo k0s stop ; sudo k0s reset; sudo k0s reset; sudo reboot
+```
