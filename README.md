@@ -65,15 +65,16 @@ stringData:
 
 EOF
 
-kubectl apply -k https://github.com/anton264/homelab/argocd
-sleep 120
+kubectl apply -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl apply -f https://raw.githubusercontent.com/anton264/homelab/main/argocd/argocd-cm.yaml
+kubectl apply -f https://raw.githubusercontent.com/anton264/homelab/main/argocd/argocd-rbac-cm.yaml
+kubectl apply -f https://raw.githubusercontent.com/anton264/homelab/main/argocd/argocdingress.yaml
+kubectl apply -f https://github.com/anton264/homelab/appOfApp/templates
 
-argocd app create apps \
-    --dest-namespace argocd \
-    --dest-server https://kubernetes.default.svc \
-    --repo https://github.com/anton264/homelab.git \
-    --path appOfApp  
-argocd app sync apps 
+sleep 180
+k -n argocd rollout restart deployment
+k -n argocd rollout restart statefulset
+
 ```
 
 
