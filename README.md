@@ -2,9 +2,7 @@
 
 
 ```sh
-export GODADDY-API-KEY=h1JuZV68ZYUj_NktxGxxHvgnPW3NceMhKTv
-export GODADDY-API-SECRET=AE7vfKAzLB74XEsnMitzmz
-export GITHUB-CLIENT-SECRET=0f458bed99dc52ef76e856a6cfc4419e1861b49a
+
 
 curl -sSLf https://get.k0s.sh | sudo sh
 sudo k0s install controller --single
