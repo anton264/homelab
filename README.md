@@ -14,9 +14,13 @@ kubectl create ns cert-manager
 kubectl create ns argocd
 kubectl apply -f https://raw.githubusercontent.com/anton264/homelab/main/publicip.yaml
 
-kubectl -n externaldns create job --from=cronjob/public-ip-cronjob firstjob
-kubectl -n externaldns wait --for=condition=complete job/firstjob
-kubectl -n externaldns delete job firstjob
+
+until kubectl get configmap public-ip-config -n externaldns -o jsonpath='{.data.public-ip}' | grep -P '^(?:\d{1,3}\.){3}\d{1,3}$'
+do
+  kubectl -n externaldns create job --from=cronjob/public-ip-cronjob firstjob
+  kubectl -n externaldns wait --for=condition=complete job/firstjob
+  kubectl -n externaldns delete job firstjob
+done
 k -n externaldns get configmap public-ip-config -o jsonpath={.data.public-ip}
 
 cat <<EOF | kubectl apply -f -

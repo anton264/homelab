@@ -3,10 +3,12 @@ namespace: argocd
 resources:
 - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 - https://raw.githubusercontent.com/anton264/homelab/main/argocd/argoingress.yaml
-- https://raw.githubusercontent.com/anton264/homelab/main/argocd/argocd-rbac-cm.yaml
 
 # changes to config maps
 patches:
 - path: https://raw.githubusercontent.com/anton264/homelab/main/argocd/argocd-cm.yaml
+  target:
+    namespace: argocd
+- path: https://raw.githubusercontent.com/anton264/homelab/main/argocd/argocd-rbac-cm.yaml
   target:
     namespace: argocd
