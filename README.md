@@ -7,10 +7,7 @@
 curl -sSLf https://get.k0s.sh | sudo sh
 sudo k0s install controller --single
 sudo k0s start
-sleep 120
-sudo cp /var/lib/k0s/pki/admin.conf .kube/config
-chmod 600 .kube/config
-k get nodes
+until sudo cp /var/lib/k0s/pki/admin.conf .kube/config && chmod 600 .kube/config && k get nodes | grep ${HOSTNAME}; do echo "Waiting for k0s"; sleep 5; done
 
 kubectl create ns externaldns
 kubectl create ns cert-manager
@@ -28,6 +25,8 @@ kind: Secret
 metadata:
   name: github-client-secret
   namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: argocd
 type: Opaque
 stringData:
   dex.github.clientSecret: ${GITHUBCLIENTSECRET}
@@ -43,8 +42,8 @@ metadata:
 type: Opaque
 stringData:
   token: ${GODADDYAPIKEY}:${GODADDYAPISECRET}
-  GODADDYAPIKEY: ${GODADDYAPIKEY}
-  GODADDYAPISECRET: ${GODADDYAPISECRET}
+  godaddy-api-key: ${GODADDYAPIKEY}
+  godaddy-api-secret: ${GODADDYAPISECRET}
 
 EOF
 
@@ -57,8 +56,8 @@ metadata:
 type: Opaque
 stringData:
   token: ${GODADDYAPIKEY}:${GODADDYAPISECRET}
-  GODADDYAPIKEY: ${GODADDYAPIKEY}
-  GODADDYAPISECRET: ${GODADDYAPISECRET}
+  godaddy-api-key: ${GODADDYAPIKEY}
+  godaddy-api-secret: ${GODADDYAPISECRET}
 
 EOF
 
