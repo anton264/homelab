@@ -1,14 +1,16 @@
 # additional resources like ingress rules, cluster and repository secrets.
 namespace: argocd
+
 resources:
 - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 - https://raw.githubusercontent.com/anton264/homelab/main/argocd/argoingress.yaml
 
 # changes to config maps
+
 patches:
-- path: https://raw.githubusercontent.com/anton264/homelab/main/argocd/argocd-cm.yaml
-  target:
-    namespace: argocd
+- path: argocd-cm.yaml
 - path: https://raw.githubusercontent.com/anton264/homelab/main/argocd/argocd-rbac-cm.yaml
-  target:
-    namespace: argocd
+#   target:
+#     namespace: argocd
+#     kind: ConfigMap
+#     name: argocd-rbac-cm
