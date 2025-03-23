@@ -2,11 +2,11 @@
 namespace: argocd
 
 resources:
-- https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-- https://raw.githubusercontent.com/anton264/homelab/main/argocd/argoingress.yaml
+- github.com/argoproj/argo-cd//manifests/cluster-install?ref=stable
+- https://raw.githubusercontent.com/anton264/homelab/k3s/argocd/argoingress.yaml
 
 # changes to config maps
 
 patches:
-- path: https://raw.githubusercontent.com/anton264/homelab/main/argocd/argocd-cm.yaml
-- path: https://raw.githubusercontent.com/anton264/homelab/main/argocd/argocd-rbac-cm.yaml
+- path: https://raw.githubusercontent.com/anton264/homelab/k3s/argocd/argocd-cm.yaml
+- path: https://raw.githubusercontent.com/anton264/homelab/k3s/argocd/argocd-rbac-cm.yaml

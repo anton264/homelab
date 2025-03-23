@@ -40,29 +40,6 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cloudflare-cert-manager
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: 'https://snowdrop.github.io/cloudflare-webhook'
-    targetRevision: 0.3.0
-    helm:
-      parameters:
-        - name: groupName
-          value: kallhall.cc
-    chart: cloudflare-webhook
-  destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: cert-manager
-  syncPolicy:
-    automated: {}    
-
----
-
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
   name: externaldns
   namespace: argocd
 spec:
