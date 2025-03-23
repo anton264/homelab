@@ -9,15 +9,8 @@ spec:
     repoURL: 'https://kubernetes-sigs.github.io/external-dns/'
     targetRevision: 1.16.0
     helm:
-      parameters:
-        - name: provider.name
-          value: cloudflare
-        - name: txtOwnerId
-          value: k3s
-        - name: txtPrefix
-          value: external-dns.
       values: >-
-        extraArgs: ["--default-targets=$(PUBLIC-IP)"]
+        extraArgs: '["--default-targets=$(PUBLIC-IP)"]'
         provider:
           name: cloudflare
         env:
@@ -26,11 +19,11 @@ spec:
               secretKeyRef:
                 name: cloudflare-api-key
                 key: apiKey
-        - name: PUBLIC-IP
-          valueFrom:
-            configMapKeyRef:
-              name: public-ip-config
-              key: public-ip
+          - name: PUBLIC-IP
+            valueFrom:
+              configMapKeyRef:
+                name: public-ip-config
+                key: public-ip
     chart: external-dns
   destination:
     server: 'https://kubernetes.default.svc'

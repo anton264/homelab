@@ -50,9 +50,26 @@ stringData:
   dex.github.clientSecret: ${GITHUBCLIENTSECRET}
 EOF
 
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+stringData:
+  apiKey: ${cloudflareAPItoken} 
+kind: Secret
+metadata:
+  name: cloudflare-api-key
+  namespace: externaldns
+EOF
 
-kubectl -n externaldns create secret generic cloudflare-api-key --from-literal=apiKey=${cloudflareAPItoken} 
-kubectl -n cert-manager create secret generic cloudflare-api-token-secret --from-literal=api-token=${cloudflareAPItoken}
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflare-api-token-secret
+  namespace: cert-manager
+type: Opaque
+stringData:
+  api-token: ${cloudflareAPItoken}
+EOF
 
 
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
