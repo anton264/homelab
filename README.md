@@ -14,9 +14,8 @@ exit
 
 wip, cloudflare restricted their api. Needs other provider
 ```sh
-mkdir -p /etc/rancher/k3s/config.yaml.d
-echo "disable:
-  - traefik" > /etc/rancher/k3s/config.yaml.d/traefik.yaml
+sudo mkdir -p /etc/rancher/k3s/config.yaml.d
+echo -e "disable:\n  - traefik" | sudo tee /etc/rancher/k3s/config.yaml.d/traefik.yaml > /dev/null
 curl -sfL https://get.k3s.io | sh -
 sudo cp /etc/rancher/k3s/k3s.yaml $HOME/k3s.yaml
 sudo chown $(whoami) $HOME/k3s.yaml
@@ -38,7 +37,20 @@ do
 done
 kubectl -n externaldns get configmap public-ip-config -o jsonpath={.data.public-ip}
 
-kubectl -n argocd create secret generic github-client-secret --from-literal=dex.github.clientSecret=${GITHUBCLIENTSECRET}
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-client-secret
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: argocd
+type: Opaque
+stringData:
+  dex.github.clientSecret: ${GITHUBCLIENTSECRET}
+EOF
+
+
 kubectl -n externaldns create secret generic cloudflare-api-key --from-literal=apiKey=${cloudflareAPItoken} 
 kubectl -n cert-manager create secret generic cloudflare-api-token-secret --from-literal=api-token=${cloudflareAPItoken}
 
