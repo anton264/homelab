@@ -12,7 +12,7 @@ data:
           orgs:
           - name: "240snusn"
   server.insecure: "true"
-  url: https://argocd.eriksmo.top
+  url: https://argocd.kallhall.cc
 kind: ConfigMap
 metadata:
   labels:

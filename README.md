@@ -36,18 +36,18 @@ stringData:
   dex.github.clientSecret: ${GITHUBCLIENTSECRET}
 
 EOF
-
+kubectl -n externaldns create secret generic cloudflare-api-key --from-literal=apiKey=JtSjaqubq-Fu7cN7hMsChR9Mpr0p6wZZpPi6c8hy --from-literal=email=4mgty4bv5h@privaterelay.appleid.com
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret
 metadata:
-  name: godaddy-api-key
+  name: cloudflare-api-key
   namespace: externaldns
 type: Opaque
 stringData:
-  token: ${GODADDYAPIKEY}:${GODADDYAPISECRET}
-  godaddy-api-key: ${GODADDYAPIKEY}
-  godaddy-api-secret: ${GODADDYAPISECRET}
+  token: ${cloudflareAPIKEY}:${cloudflareAPISECRET}
+  cloudflare-api-key: ${cloudflareAPIKEY}
+  cloudflare-api-secret: ${cloudflareAPISECRET}
 
 EOF
 
@@ -55,13 +55,13 @@ cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret
 metadata:
-  name: godaddy-api-key
+  name: cloudflare-api-key
   namespace: cert-manager
 type: Opaque
 stringData:
-  token: ${GODADDYAPIKEY}:${GODADDYAPISECRET}
-  godaddy-api-key: ${GODADDYAPIKEY}
-  godaddy-api-secret: ${GODADDYAPISECRET}
+  token: ${cloudflareAPIKEY}:${cloudflareAPISECRET}
+  cloudflare-api-key: ${cloudflareAPIKEY}
+  cloudflare-api-secret: ${cloudflareAPISECRET}
 
 EOF
 
@@ -101,7 +101,7 @@ sudo k0s stop ; sudo k0s reset; sudo k0s reset; sudo reboot
 ```
 ## K3s
 
-wip, godaddy restricted their api. Needs other provider
+wip, cloudflare restricted their api. Needs other provider
 ```sh
 curl -sfL https://get.k3s.io | sh -
 sudo cp /etc/rancher/k3s/k3s.yaml $HOME/k3s.yaml
@@ -141,26 +141,26 @@ cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret
 metadata:
-  name: godaddy-api-key
+  name: cloudflare-api-key
   namespace: externaldns
 type: Opaque
 stringData:
-  token: ${GODADDYAPIKEY}:${GODADDYAPISECRET}
-  godaddy-api-key: ${GODADDYAPIKEY}
-  godaddy-api-secret: ${GODADDYAPISECRET}
+  token: ${cloudflareAPIKEY}:${cloudflareAPISECRET}
+  cloudflare-api-key: ${cloudflareAPIKEY}
+  cloudflare-api-secret: ${cloudflareAPISECRET}
 EOF
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret
 metadata:
-  name: godaddy-api-key
+  name: cloudflare-api-key
   namespace: cert-manager
 type: Opaque
 stringData:
-  token: ${GODADDYAPIKEY}:${GODADDYAPISECRET}
-  godaddy-api-key: ${GODADDYAPIKEY}
-  godaddy-api-secret: ${GODADDYAPISECRET}
+  token: ${cloudflareAPIKEY}:${cloudflareAPISECRET}
+  cloudflare-api-key: ${cloudflareAPIKEY}
+  cloudflare-api-secret: ${cloudflareAPISECRET}
 EOF
 
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
