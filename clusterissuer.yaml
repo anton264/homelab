@@ -6,23 +6,19 @@ spec:
   acme:
     # ACME Server
     # prod : https://acme-v02.api.letsencrypt.org/directory
-    # staging : https://acme-staging-v02.api.letsencrypt.org/directory
-    server: https://acme-v02.api.letsencrypt.org/directory
+    # staging : 
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    #server: https://acme-v02.api.letsencrypt.org/directory
     # ACME Email address
     email: eriksmo@kallhall.cc
     privateKeySecretRef:
-      name: letsencrypt-prod # staging or production
+      name: letsencrypt-stag # staging or production
     solvers:
     - dns01:
-        webhook:
-          config:
-            apiKeySecretRef:
-              name: cloudflare-api-key
-              key: token
-            production: true
-            ttl: 600
-          groupName: kallhall.cc
-          solverName: cloudflare
+        cloudflare:
+          apiTokenSecretRef:
+            name: cloudflare-api-token-secret
+            key: api-token
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
