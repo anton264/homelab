@@ -12,7 +12,7 @@ exit
 ```
 ## K3s
 
-wip, cloudflare restricted their api. Needs other provider
+
 ```sh
 sudo mkdir -p /etc/rancher/k3s/config.yaml.d
 echo -e "disable:\n  - traefik" | sudo tee /etc/rancher/k3s/config.yaml.d/traefik.yaml > /dev/null
@@ -73,15 +73,7 @@ EOF
 
 
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-kubectl apply -n argocd -f https://raw.githubusercontent.com/anton264/homelab/refs/heads/k3s/argocd/argocd-cm.yaml
-kubectl apply -n argocd -f https://raw.githubusercontent.com/anton264/homelab/refs/heads/k3s/argocd/argocd-rbac-cm.yaml
-kubectl apply -n argocd -f https://raw.githubusercontent.com/anton264/homelab/refs/heads/k3s/argocd/argoingress.yaml
-kubectl apply -f https://raw.githubusercontent.com/anton264/homelab/refs/heads/k3s/appOfApp/templates/all.yaml
-until kubectl apply -f https://raw.githubusercontent.com/anton264/homelab/refs/heads/k3s/appOfApp/templates/metallbobjects.yaml
-do
-  echo "Waiting for metallb.."
-  sleep 5
-done
+kubectl apply -n argocd -f https://raw.githubusercontent.com/anton264/homelab/refs/heads/k3s/appOfapp.yaml
 
 sleep 180
 kubectl -n argocd rollout restart deployment
