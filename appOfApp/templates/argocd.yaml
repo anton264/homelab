@@ -1,8 +1,0 @@
-project: default
-source:
-  repoURL: https://github.com/anton264/homelab
-  path: argocd
-  targetRevision: k3s
-destination:
-  server: https://kubernetes.default.svc
-  namespace: argocd
