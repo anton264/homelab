@@ -18,7 +18,7 @@ spec:
               "repositories": ["anton264/homelab"],
               "gitAuthor": "Renovate Bot <bot@renovateapp.com>"
               "argocd": {
-                "fileMatch": ["appOfApp/.+\\.yaml$"]
+                "fileMatch": ["\\.yaml$"]
               }
               "repositories": ["anton264/homelab"],
               "dryRun" : "full"
