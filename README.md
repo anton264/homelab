@@ -27,7 +27,7 @@ kubectl get nodes
 kubectl create ns externaldns
 kubectl create ns cert-manager
 kubectl create ns argocd
-kubectl apply -f https://raw.githubusercontent.com/anton264/homelab/k3s/publicip.yaml
+kubectl apply -f https://raw.githubusercontent.com/anton264/homelab/main/publicip/publicip.yaml
 
 until kubectl get configmap public-ip-config -n externaldns -o jsonpath='{.data.public-ip}' | grep -P '^(?:\d{1,3}\.){3}\d{1,3}$'
 do
