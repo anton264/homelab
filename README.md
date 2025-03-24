@@ -84,7 +84,7 @@ EOF
 
 
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-kubectl apply -n argocd -f https://raw.githubusercontent.com/anton264/homelab/refs/heads/k3s/appOfapp.yaml
+kubectl apply -n argocd -f https://raw.githubusercontent.com/anton264/homelab/refs/heads/main/appOfapp.yaml
 
 sleep 180
 kubectl -n argocd rollout restart deployment
