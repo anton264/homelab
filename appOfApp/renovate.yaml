@@ -18,8 +18,7 @@ spec:
               "argocd": {
                 "fileMatch": ["appOfApp/.+\\.yaml$"]
               },
-              "repositories": ["anton264/homelab"],
-              "dryRun" : "full"
+              "repositories": ["anton264/homelab"]
             }
           existingConfigFile: false
         envFrom:
