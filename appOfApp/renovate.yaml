@@ -22,13 +22,9 @@ spec:
               "dryRun" : "full"
             }
           existingConfigFile: false
-          env:
-            - name: GITHUB_COM_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: renovate-secrets
-                  key: GITHUB_COM_TOKEN
-          envFrom: []
+        envFrom:
+          - secretRef:
+              name: renovate-secrets
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: renovate
