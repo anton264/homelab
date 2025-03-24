@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: renovate
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://docs.renovatebot.com/helm-charts'
+    targetRevision: 36.31.4
+    chart: renovate
+    helm:
+      values: |
+        renovate:
+          config: |
+            {
+              "platform": "github",
+              "repositories": ["anton264/homelab"],
+              "gitAuthor": "Renovate Bot <bot@renovateapp.com>"
+              "argocd": {
+                "fileMatch": ["appOfApp/.+\\.yaml$"]
+              }
+              "repositories": ["anton264/homelab"],
+              "dryRun" : "full"
+            }
+          existingConfigFile: false
+          envFrom:
+            - secretRef:
+                name: renovate-secrets
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: renovate
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true

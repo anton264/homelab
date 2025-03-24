@@ -71,6 +71,17 @@ stringData:
   api-token: ${cloudflareAPItoken}
 EOF
 
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: Secret
+metadata:
+  name: renovate-secrets
+  namespace: renovate
+type: Opaque
+stringData:
+  GITHUB_COM_TOKEN: ${GITHUBCOMTOKEN}
+EOF
+
 
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl apply -n argocd -f https://raw.githubusercontent.com/anton264/homelab/refs/heads/k3s/appOfapp.yaml
