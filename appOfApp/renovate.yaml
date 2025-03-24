@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://docs.renovatebot.com/helm-charts'
-    targetRevision: 36.31.4
+    targetRevision: 39.213.0
     chart: renovate
     helm:
       values: |
