@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: appofapp
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/anton264/homelab
+    path: appOfApp
+    targetRevision: k3s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
