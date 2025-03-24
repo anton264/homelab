@@ -17,7 +17,7 @@ spec:
               "platform": "github",
               "argocd": {
                 "fileMatch": ["appOfApp/.+\\.yaml$"]
-              }
+              },
               "repositories": ["anton264/homelab"],
               "dryRun" : "full"
             }
