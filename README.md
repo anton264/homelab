@@ -79,7 +79,7 @@ metadata:
   namespace: renovate
 type: Opaque
 stringData:
-  GITHUB_COM_TOKEN: ${GITHUBCOMTOKEN}
+  RENOVATE_TOKEN: ${GITHUBCOMTOKEN}
 EOF
 
 
