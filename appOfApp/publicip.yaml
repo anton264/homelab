@@ -12,3 +12,7 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: externaldns
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - CreateNamespace=true
