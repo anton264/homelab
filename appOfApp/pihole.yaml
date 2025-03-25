@@ -11,6 +11,11 @@ spec:
     chart: pihole
     helm:
       values: |
+        podDnsConfig:
+          enabled: true
+          policy: "None"
+          nameservers:
+          - 1.1.1.1
         serviceWeb:
           type: ClusterIP
           port: 80
@@ -21,7 +26,6 @@ spec:
           #  metallb.universe.tf/loadBalancerIPs: "192.168.1.53"  # Replace with your desired IP
         ingress:
           enabled: true
-          ingressClassName: nginx
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt-prod
           hosts:
