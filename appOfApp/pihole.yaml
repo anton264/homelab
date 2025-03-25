@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pihole
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://mojo2600.github.io/pihole-kubernetes/
+    targetRevision: 2.20.0
+    chart: pihole
+    helm:
+      values: |
+        podDnsConfig:
+          enabled: true
+          policy: "None"
+          nameservers:
+          - 127.0.0.1
+          - 1.1.1.1
+        serviceWeb:
+          type: ClusterIP
+          port: 80
+        serviceDns:
+          type: LoadBalancer
+          port: 53
+          #annotations:
+          #  metallb.universe.tf/loadBalancerIPs: "192.168.1.53"  # Replace with your desired IP
+        ingress:
+          enabled: true
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-prod
+          hosts:
+            - host: pihole.local  # Replace with your domain
+              paths:
+                - path: /
+                  pathType: Prefix
+        admin:
+          existingSecret: "pihole-admin"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: pihole
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
