@@ -23,7 +23,6 @@ spec:
         serviceDns:
           mixedService: true
           type: LoadBalancer
-          loadBalancerIP: 192.168.2.252
           port: 53
           #annotations:
           #  metallb.universe.tf/loadBalancerIPs: "192.168.1.53"  # Replace with your desired IP
