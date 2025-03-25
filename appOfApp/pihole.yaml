@@ -31,9 +31,7 @@ spec:
             cert-manager.io/cluster-issuer: letsencrypt-prod
           hosts:
             - host: pihole.local  # Replace with your domain
-              paths:
-                - path: /
-                  pathType: Prefix
+
         admin:
           existingSecret: "pihole-admin"
   destination:
