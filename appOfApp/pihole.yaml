@@ -20,11 +20,6 @@ spec:
         serviceWeb:
           type: ClusterIP
           port: 80
-        serviceDns:
-          type: LoadBalancer
-          port: 53
-          #annotations:
-          #  metallb.universe.tf/loadBalancerIPs: "192.168.1.53"  # Replace with your desired IP
         ingress:
           enabled: true
           annotations:
