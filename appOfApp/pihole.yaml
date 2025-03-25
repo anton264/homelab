@@ -11,12 +11,6 @@ spec:
     chart: pihole
     helm:
       values: |
-        podDnsConfig:
-          enabled: true
-          policy: "None"
-          nameservers:
-          - 127.0.0.1
-          - 1.1.1.1
         serviceWeb:
           type: ClusterIP
           port: 80
