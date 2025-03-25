@@ -31,6 +31,11 @@ spec:
             cert-manager.io/cluster-issuer: letsencrypt-prod
           hosts:
             - pihole.local  # Replace with your domain
+          tls: []
+            - secretName: pi-hole-tls
+              hosts:
+               #- virtualHost (default value is pi.hole) will be appended to the hosts
+                - pihole.local
           ingressClassName: nginx
         admin:
           existingSecret: "pihole-admin"
