@@ -20,6 +20,7 @@ spec:
           type: ClusterIP
           port: 80
         serviceDns:
+          mixedService: true
           type: LoadBalancer
           port: 53
           #annotations:
