@@ -29,6 +29,7 @@ spec:
           enabled: true
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt-prod
+          pathType: Prefix
           hosts:
             - pihole.local  # Replace with your domain
           tls:
