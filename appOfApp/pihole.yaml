@@ -24,8 +24,8 @@ spec:
           mixedService: true
           type: LoadBalancer
           port: 53
-          #annotations:
-          #  metallb.universe.tf/loadBalancerIPs: "192.168.1.53"  # Replace with your desired IP
+          annotations:
+            metallb.universe.tf/loadBalancerIPs: "12.12.12.111"  # Replace with your desired IP
         ingress:
           enabled: true
           annotations:
