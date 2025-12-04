@@ -12,6 +12,7 @@ spec:
       values: >-
         extraArgs: 
           - "--default-targets=$(PUBLIC-IP)"
+          - "--force-default-targets"
         provider:
           name: cloudflare
         env:
