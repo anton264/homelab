@@ -18,7 +18,15 @@ spec:
               "argocd": {
                 "fileMatch": ["appOfApp/.+\\.yaml$"]
               },
-              "repositories": ["anton264/homelab"]
+              "repositories": ["anton264/homelab"],	
+              "packageRules": [	
+              {	
+              "matchUpdateTypes": ["minor", "patch"],	
+              "matchCurrentVersion": "!/^0/",	
+              "automerge": true	      "repositories": ["anton264/homelab"]
+              }	    } 
+              ]	
+              }
             }
           existingConfigFile: false
         envFrom:
