@@ -27,3 +27,8 @@ kind: BGPAdvertisement
 metadata:
   name: example
   namespace: metallb-system
+spec:
+  aggregationLength: 32
+  aggregationLengthV6: 128
+  ipAddressPools:
+    - first-pool
