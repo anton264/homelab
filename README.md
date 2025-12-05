@@ -10,6 +10,8 @@ commit
 save
 exit
 ```
+
+add nexthop-self to adress
 ## K3s
 
 
