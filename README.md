@@ -4,14 +4,13 @@ https://medium.com/@ipuustin/using-metallb-as-kubernetes-load-balancer-with-ubiq
 ```sh
 configure
 set protocols bgp 64512 parameters router-id 192.168.2.1
-set protocols bgp 64512 neighbor 192.168.2.200 remote-as 64512
+set protocols bgp 64512 neighbor 12.12.12.150 remote-as 64512
 set protocols bgp 64512 maximum-paths ibgp 32
 commit
 save
 exit
 ```
 
-add nexthop-self to adress
 ## K3s
 
 
