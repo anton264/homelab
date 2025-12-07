@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: oauth2-jellyfin
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://oauth2-proxy.github.io/manifests
+    targetRevision: 9.0.0
+    helm:
+      values: |-
+        ingress:
+          enabled: true
+          className: nginx
+          path: /oauth2
+          # Only used if API capabilities (networking.k8s.io/v1) allow it
+          pathType: Prefix
+          # Used to create an Ingress record.
+          hosts:
+          - jellyfin.kallhall.cc
+          tls:
+          # Secrets must be manually created in the namespace.
+          - secretName: jellyfin-kallhall-cc
+            hosts:
+              - jellyfin.kallhall.cc
+        config:
+          # Default configuration, to be overridden
+          configFile: |-
+            github_org = "240snusn"
+            provider = "github"
+            upstreams = [ "file:///dev/null" ]
+            email_domains = [ "*" ]
+    chart: oauth2-proxy
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: jellyfin
