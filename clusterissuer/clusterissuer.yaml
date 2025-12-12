@@ -7,12 +7,12 @@ spec:
     # ACME Server
     # prod : https://acme-v02.api.letsencrypt.org/directory
     # staging : 
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
-    #server: https://acme-v02.api.letsencrypt.org/directory
+    # server: https://acme-staging-v02.api.letsencrypt.org/directory
+    server: https://acme-v02.api.letsencrypt.org/directory
     # ACME Email address
-    email: eriksmo@kallhall.cc
+    email: mail@kallhall.cc
     privateKeySecretRef:
-      name: letsencrypt-stag # staging or production
+      name: letsencrypt-prod # staging or production
     solvers:
     - dns01:
         cloudflare:
