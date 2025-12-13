@@ -15,6 +15,10 @@ spec:
           value: "https://github.com/240snusn"
         - name: githubConfigSecret
           value: "pre-defined-secret"
+        - name: controllerServiceAccount.namespace
+          value: "arc-systems"
+        - name: controllerServiceAccount.name
+          value: "gha-runner-scale-set-controller-gha-rs-controller"
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: arc-runners
