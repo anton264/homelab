@@ -18,7 +18,7 @@ spec:
               "argocd": {
                 "fileMatch": ["appOfApp/.+\\.yaml$"]
               },
-              "repositories": ["anton264/homelab"],	
+              "repositories": ["240snusn/homelab"],	
               "packageRules": [	
               {	
               "matchUpdateTypes": ["minor", "patch"],	

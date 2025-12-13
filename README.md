@@ -28,7 +28,7 @@ kubectl get nodes
 kubectl create ns externaldns
 kubectl create ns cert-manager
 kubectl create ns argocd
-kubectl apply -f https://raw.githubusercontent.com/anton264/homelab/main/publicip/publicip.yaml
+kubectl apply -f https://raw.githubusercontent.com/240snusn/homelab/main/publicip/publicip.yaml
 
 until kubectl get configmap public-ip-config -n externaldns -o jsonpath='{.data.public-ip}' | grep -P '^(?:\d{1,3}\.){3}\d{1,3}$'
 do
@@ -85,7 +85,7 @@ EOF
 
 
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-kubectl apply -n argocd -f https://raw.githubusercontent.com/anton264/homelab/refs/heads/main/appOfapp.yaml
+kubectl apply -n argocd -f https://raw.githubusercontent.com/240snusn/homelab/refs/heads/main/appOfapp.yaml
 
 sleep 180
 kubectl -n argocd rollout restart deployment
