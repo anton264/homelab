@@ -21,8 +21,11 @@ spec:
           className: nginx
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt-prod
-            nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-            nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+            #nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+            #nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
+            nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+            nginx.ingress.kubernetes.io/auth-tls-secret: "default/ca-secret"
+            nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
           hosts:
             - host: jellyfin.kallhall.cc
               paths:
