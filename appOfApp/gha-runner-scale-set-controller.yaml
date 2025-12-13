@@ -13,6 +13,6 @@ spec:
     server: 'https://kubernetes.default.svc'
     namespace: arc-systems
   syncPolicy:
-    automated: {}
+    #automated: {}
     syncOptions:
       - CreateNamespace=true
