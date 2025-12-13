@@ -23,7 +23,7 @@ spec:
               {	
               "matchUpdateTypes": ["minor", "patch"],	
               "matchCurrentVersion": "!/^0/",	
-              "automerge": true	      "repositories": ["anton264/homelab"]
+              "automerge": true
               }	    } 
               ]	
               }
