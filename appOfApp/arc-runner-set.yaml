@@ -19,6 +19,8 @@ spec:
           value: "arc-systems"
         - name: controllerServiceAccount.name
           value: "gha-runner-scale-set-controller-gha-rs-controller"
+        - name: template.spec.serviceAccountName
+          value: "secret-creator-sa"
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: arc-runners
