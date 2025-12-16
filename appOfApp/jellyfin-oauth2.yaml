@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://oauth2-proxy.github.io/manifests
-    targetRevision: 9.0.0
+    targetRevision: 9.0.1
     helm:
       values: |-
         ingress:
