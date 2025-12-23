@@ -15,5 +15,7 @@ spec:
   ignoreDifferences:
     - group: core
       kind: Configmap
+      name: public-ip-config
+      namespace: externaldns
       jsonPointers:
         - /data
