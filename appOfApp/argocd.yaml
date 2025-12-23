@@ -12,8 +12,3 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
-  ignoreDifferences:
-    - group: core
-      kind: configmap
-      jsonPointers:
-        - /data/public-ip
