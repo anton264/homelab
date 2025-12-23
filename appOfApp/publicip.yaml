@@ -14,7 +14,7 @@ spec:
     namespace: externaldns
   ignoreDifferences:
     - group: core
-      kind: Configmap
+      kind: ConfigMap
       name: public-ip-config
       namespace: externaldns
       jsonPointers:
