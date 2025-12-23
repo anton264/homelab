@@ -13,7 +13,7 @@ spec:
     server: https://kubernetes.default.svc
     namespace: externaldns
   ignoreDifferences:
-    - group: core
+    - group: ""
       kind: ConfigMap
       name: public-ip-config
       namespace: externaldns
