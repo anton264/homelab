@@ -12,7 +12,6 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
-spec:
   ignoreDifferences:
     - group: core
       kind: configmap
