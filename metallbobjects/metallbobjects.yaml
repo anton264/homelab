@@ -6,9 +6,11 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - 192.168.2.250/32
-  - 12.12.12.150/32
-  - 12.12.12.111/32
+  - 10.1.1.150/32
+  - 10.1.1.151/32
+  - 10.1.1.152/32
+  - 10.1.1.153/32
+  #- 12.12.12.111/32
 
 ---
 apiVersion: metallb.io/v1beta2
@@ -19,7 +21,7 @@ metadata:
 spec:
   myASN: 64512
   peerASN: 64512
-  peerAddress: 192.168.2.1
+  peerAddress: 10.1.1.1
 
 ---
 
@@ -32,4 +34,4 @@ spec:
   aggregationLength: 32
   aggregationLengthV6: 128
   ipAddressPools:
-    - first-pool
+    - bgp-address-pool
