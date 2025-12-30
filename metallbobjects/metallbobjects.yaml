@@ -34,4 +34,4 @@ spec:
   aggregationLength: 32
   aggregationLengthV6: 128
   ipAddressPools:
-    - first-pool
+    - bgp-address-pool
