@@ -32,7 +32,7 @@ spec:
               - FOWNER
               - SETGID
               - SETUID
-              - CAP_NET_BIND_SERVICE
+              - NET_BIND_SERVICE
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: kube-system
