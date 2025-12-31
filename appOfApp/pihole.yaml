@@ -24,19 +24,17 @@ spec:
           mixedService: true
           type: LoadBalancer
           port: 53
-          annotations:
-            metallb.universe.tf/loadBalancerIPs: "12.12.12.111"  # Replace with your desired IP
         ingress:
           enabled: true
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt-prod
           pathType: Prefix
           hosts:
-            - pihole.local  # Replace with your domain
+            - pihole.lan  # Replace with your domain
           tls:
             - secretName: pi-hole-tls
               hosts:
-                - pihole.local
+                - pihole.lan
           ingressClassName: nginx
         admin:
           existingSecret: "pihole-admin"
