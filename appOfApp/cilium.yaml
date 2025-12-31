@@ -34,6 +34,7 @@ spec:
               - SETUID
               - NET_BIND_SERVICE
         kubeProxyReplacement: true
+        installCRDs: true
         gatewayAPI:
           enabled: true
   destination:
