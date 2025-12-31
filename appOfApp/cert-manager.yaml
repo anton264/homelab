@@ -12,8 +12,13 @@ spec:
       parameters:
         - name: installCRDs
           value: 'true'
-        - name: enableGatewayAPI
+        - name: config.enableGatewayAPI
           value: 'true'
+        - name: config.apiVersion
+          value: 'controller.config.cert-manager.io/v1alpha1'
+        - name: config.kind
+          value: 'ControllerConfiguration'
+          
     chart: cert-manager
   destination:
     server: 'https://kubernetes.default.svc'
