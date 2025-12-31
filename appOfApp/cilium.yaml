@@ -40,6 +40,8 @@ spec:
         ingressController:
           enabled: true
           loadbalancerMode: dedicated
+          service:
+            loadBalancerIP: "10.1.2.100"
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: kube-system
