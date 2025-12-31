@@ -1,0 +1,67 @@
+# Primary BGP cluster configuration with auto-discovery
+apiVersion: cilium.io/v2
+kind: CiliumBGPClusterConfig
+metadata:
+  name: datacenter-bgp
+spec:
+  nodeSelector:
+    matchLabels:
+      bgp-policy: a
+  bgpInstances:
+  - name: "main-instance"
+    localASN: 65000
+    localPort: 179
+    peers:
+    - name: "tor-autodiscovery-ipv4"
+      peerASN: 65000
+      autoDiscovery:
+        mode: "DefaultGateway"
+        defaultGateway:
+          addressFamily: ipv4
+      peerConfigRef:
+        name: "cilium-peer"
+
+---
+apiVersion: cilium.io/v2
+kind: CiliumBGPAdvertisement
+metadata:
+  name: bgp-advertisement
+  labels:
+    advertise: "bgp"
+spec:
+  advertisements:
+    - advertisementType: "Service"
+      service:
+        addresses:
+          - LoadBalancerIP
+          - ExternalIP
+      selector: {}
+---
+apiVersion: cilium.io/v2
+kind: CiliumBGPPeerConfig
+metadata:
+  name: cilium-peer
+spec:
+  timers:
+    connectRetryTimeSeconds: 5
+    holdTimeSeconds: 90
+    keepAliveTimeSeconds: 30
+  ebgpMultihop: 4
+  gracefulRestart:
+    enabled: true
+    restartTimeSeconds: 15
+  families:
+    - afi: ipv4
+      safi: unicast
+      advertisements:
+        matchLabels:
+          advertise: "bgp"   # matches the Advertisement above
+---
+apiVersion: "cilium.io/v2"
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: "lb-pool"
+spec:
+  allowFirstLastIPs: "No"
+  blocks:
+  - cidr: "10.1.2.0/24"
