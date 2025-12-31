@@ -34,7 +34,7 @@ spec:
           tls:
             - secretName: pi-hole-tls
               hosts:
-                - pihole.local
+                - pihole.lan
           ingressClassName: nginx
         admin:
           existingSecret: "pihole-admin"
