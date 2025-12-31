@@ -37,6 +37,9 @@ spec:
         installCRDs: true
         gatewayAPI:
           enabled: true
+        ingressController:
+          enabled: true
+          loadbalancerMode: dedicated
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: kube-system
