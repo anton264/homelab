@@ -27,7 +27,8 @@ spec:
         ingress:
           enabled: true
           annotations:
-            cert-manager.io/cluster-issuer: letsencrypt-prod
+            #cert-manager.io/cluster-issuer: letsencrypt-prod
+            io.cilium/lb-ipam-ips: "10.1.2.101"
           pathType: Prefix
           hosts:
             - pihole.lan  # Replace with your domain
