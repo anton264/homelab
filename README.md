@@ -17,6 +17,7 @@ exit
 ```sh
 sudo mkdir -p /etc/rancher/k3s/config.yaml.d
 echo -e "disable:\n  - traefik" | sudo tee /etc/rancher/k3s/config.yaml.d/traefik.yaml > /dev/null
+export API_SERVER_IP=10.1.1.10
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC='--flannel-backend=none --disable-network-policy --disable-kube-proxy' sh -
 sudo cp /etc/rancher/k3s/k3s.yaml $HOME/k3s.yaml
 sudo chown $(whoami) $HOME/k3s.yaml
