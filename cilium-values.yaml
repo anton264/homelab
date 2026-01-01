@@ -34,4 +34,4 @@ ingressController:
   enabled: true
   loadbalancerMode: shared
   service:
-    loadBalancerIP: "10.1.2.100"
+    loadBalancerIP: "10.1.2.150"
