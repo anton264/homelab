@@ -32,6 +32,6 @@ gatewayAPI:
   enabled: true
 ingressController:
   enabled: true
-  loadbalancerMode: dedicated
+  loadbalancerMode: shared
   service:
     loadBalancerIP: "10.1.2.100"
