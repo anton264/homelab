@@ -11,7 +11,6 @@ configs:
             clientSecret: $github-client-secret:dex.github.clientSecret
             orgs:
             - name: "240snusn"
-    server.insecure: "true"
     url: https://argocd.kallhall.cc
   rbac:
     policy.csv: |
@@ -26,5 +25,5 @@ server:
     ingressClassName: cilium
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
-      #ingress.cilium.io/tls-passthrough: enabled
+      ingress.cilium.io/tls-passthrough: enabled
     tls: true
