@@ -18,15 +18,10 @@ spec:
             type: hostPath
         ingress:
           enabled: true
-          className: nginx
+          className: cilium
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt-prod
-            #nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
-            #nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$escaped_request_uri"
-            nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true"
-            nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
-            nginx.ingress.kubernetes.io/auth-tls-secret: "jellyfin/ca-secret"
-            nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
+            io.cilium/lb-ipam-ips: "10.1.2.90"
           hosts:
             - host: jellyfin.kallhall.cc
               paths:
