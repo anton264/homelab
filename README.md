@@ -22,6 +22,7 @@ export API_SERVER_PORT=6443
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC='--flannel-backend=none --disable-network-policy --disable-kube-proxy' sh -
 sudo cp /etc/rancher/k3s/k3s.yaml $HOME/k3s.yaml
 sudo chown $(whoami) $HOME/k3s.yaml
+cp $HOME/k3s.yaml $HOME/.kube/config
 chmod 600 $HOME/k3s.yaml
 export KUBECONFIG=$HOME/k3s.yaml
 kubectl config set-context default --namespace=kube-system
@@ -40,6 +41,7 @@ do
 done
 kubectl -n externaldns get configmap public-ip-config -o jsonpath={.data.public-ip}
 
+kubectl create ns renovate
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret
