@@ -30,7 +30,7 @@ kubectl get nodes
 kubectl label node $(kubectl get nodes -o jsonpath='{.items[0].metadata.name}') bgp-policy=a
 helm repo add cilium https://helm.cilium.io
 helm repo update
-helm upgrade --install cilium cilium/cilium --version 1.18.5 --namespace kube-system --values https://raw.githubusercontent.com/240snusn/homelab/refs/heads/main/appOfApp/cilium-values.yaml
+helm upgrade --install cilium cilium/cilium --version 1.18.5 --namespace kube-system --values https://raw.githubusercontent.com/240snusn/homelab/refs/heads/main/cilium-values.yaml
 kubectl create ns externaldns
 kubectl create ns cert-manager
 kubectl create ns argocd
