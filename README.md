@@ -18,6 +18,7 @@ exit
 sudo mkdir -p /etc/rancher/k3s/config.yaml.d
 echo -e "disable:\n  - traefik" | sudo tee /etc/rancher/k3s/config.yaml.d/traefik.yaml > /dev/null
 export API_SERVER_IP=10.1.1.10
+export API_SERVER_PORT=6443
 curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC='--flannel-backend=none --disable-network-policy --disable-kube-proxy' sh -
 sudo cp /etc/rancher/k3s/k3s.yaml $HOME/k3s.yaml
 sudo chown $(whoami) $HOME/k3s.yaml
@@ -25,7 +26,7 @@ chmod 600 $HOME/k3s.yaml
 export KUBECONFIG=$HOME/k3s.yaml
 kubectl config set-context default --namespace=kube-system
 kubectl get nodes
-
+cilium install --version 1.18.5 --set bgpControlPlane.enabled=true --set=ipam.operator.clusterPoolIPv4PodCIDRList="10.42.0.0/16" --set=k8sServiceHost=${API_SERVER_IP} --set=k8sServicePort=${API_SERVER_PORT}
 kubectl create ns externaldns
 kubectl create ns cert-manager
 kubectl create ns argocd
