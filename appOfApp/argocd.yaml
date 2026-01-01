@@ -5,10 +5,16 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://github.com/240snusn/homelab
-    path: argocd
-    targetRevision: main
+  sources:
+    - repoURL: https://argoproj.github.io/argo-helm
+      chart: argo-cd
+      targetRevision: 7.7.13
+      helm:
+        valueFiles:
+          - $values/argocd/values.yaml
+    - repoURL: https://github.com/240snusn/homelab
+      targetRevision: main
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd

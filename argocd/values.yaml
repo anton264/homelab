@@ -1,0 +1,33 @@
+configs:
+  cm:
+    admin.enabled: "false"
+    dex.config: |
+      connectors:
+        - type: github
+          id: github
+          name: GitHub
+          config:
+            clientID: 0587817c265bc2e329cc
+            clientSecret: $github-client-secret:dex.github.clientSecret
+            orgs:
+            - name: "240snusn"
+    server.insecure: "true"
+    url: https://argocd.kallhall.cc
+  rbac:
+    policy.csv: |
+      g, 240snusn:admin, role:admin
+    policy.default: role:readonly
+    scopes: '[groups, email, profile]'
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: cilium
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    hosts:
+      - argocd.kallhall.cc
+    tls:
+      - secretName: argocd-server-tls
+        hosts:
+          - argocd.kallhall.cc
