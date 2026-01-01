@@ -36,6 +36,7 @@ spec:
         kubeProxyReplacement: true
         installCRDs: true
         l7Proxy: true
+        l2announcements.enabled: true
         gatewayAPI:
           enabled: true
         ingressController:
