@@ -22,6 +22,7 @@ spec:
           annotations:
             cert-manager.io/cluster-issuer: letsencrypt-prod
             io.cilium/lb-ipam-ips: "10.1.2.90"
+            ingress.cilium.io/loadbalancer-mode: "dedicated"
           hosts:
             - host: jellyfin.kallhall.cc
               paths:
