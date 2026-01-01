@@ -90,8 +90,11 @@ stringData:
   RENOVATE_TOKEN: ${GITHUBCOMTOKEN}
 EOF
 
+helm repo add argo https://argoproj.github.io/argo-helm
+helm repo update
+helm upgrade --install argocd argo/argo-cd --namespace argocd --create-namespace --values https://raw.githubusercontent.com/240snusn/homelab/refs/heads/main/argocd/values.yaml
 
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+#kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl apply -n argocd -f https://raw.githubusercontent.com/240snusn/homelab/refs/heads/main/appOfapp.yaml
 
 sleep 180

@@ -25,7 +25,7 @@ server:
     ingressClassName: cilium
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
-      ingress.cilium.io/tls-passthrough: enabled
+      #ingress.cilium.io/tls-passthrough: enabled
     hosts:
       - argocd.kallhall.cc
     tls:
