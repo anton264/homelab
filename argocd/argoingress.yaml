@@ -10,7 +10,7 @@ metadata:
     #
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
-  ingressClassName: nginx
+  ingressClassName: cilium
   rules:
   - host: argocd.kallhall.cc
     http:
