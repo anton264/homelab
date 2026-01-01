@@ -18,7 +18,8 @@ configs:
       g, 240snusn:admin, role:admin
     policy.default: role:readonly
     scopes: '[groups, email, profile]'
-
+global:
+  domain: argocd.kallhall.cc
 server:
   ingress:
     enabled: true
@@ -26,9 +27,4 @@ server:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
       #ingress.cilium.io/tls-passthrough: enabled
-    hosts:
-      - argocd.kallhall.cc
-    tls:
-      - secretName: argocd-server-tls
-        hosts:
-          - argocd.kallhall.cc
+    tls: true
