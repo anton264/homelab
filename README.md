@@ -26,7 +26,7 @@ chmod 600 $HOME/k3s.yaml
 export KUBECONFIG=$HOME/k3s.yaml
 kubectl config set-context default --namespace=kube-system
 kubectl get nodes
-cilium install --version 1.18.5 --set bgpControlPlane.enabled=true --set=ipam.operator.clusterPoolIPv4PodCIDRList="10.42.0.0/16" --set=k8sServiceHost=${API_SERVER_IP} --set=k8sServicePort=${API_SERVER_PORT}
+cilium install --version 1.18.5 --set bgpControlPlane.enabled=true --set=ipam.operator.clusterPoolIPv4PodCIDRList="10.42.0.0/16" --set=k8sServiceHost=${API_SERVER_IP} --set=k8sServicePort=${API_SERVER_PORT} --set=kubeProxyReplacement=true
 kubectl create ns externaldns
 kubectl create ns cert-manager
 kubectl create ns argocd
