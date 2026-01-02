@@ -15,9 +15,7 @@ spec:
             enabled: true
             size: 25Gi
             hostPath: /media
-            nfs:
-              server: truenas.lan
-              path: /mnt/jellyfin/jellyfin
+            type: hostPath
         ingress:
           enabled: true
           className: cilium
