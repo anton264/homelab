@@ -14,8 +14,8 @@ spec:
           media:
             enabled: true
             size: 25Gi
-            hostPath: /media
-            type: hostPath
+            existingClaim: jellyfin-media
+            type: pvc
         ingress:
           enabled: true
           className: cilium
