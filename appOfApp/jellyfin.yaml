@@ -10,6 +10,19 @@ spec:
     targetRevision: 2.7.0
     helm:
       values: |-
+        volumes:
+        - name: 'render-device'
+          hostPath:
+            path: '/dev/dri/renderD128'
+        volumeMounts:
+        - name: 'render-device'
+          mountPath: '/dev/dri/renderD128'
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          # getent group render | cut -d: -f3
+          supplementalGroups: [105]
+          privileged: true
         nodeSelector:
           kubernetes.io/hostname: adele
         persistence:
