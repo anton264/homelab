@@ -11,7 +11,7 @@ spec:
     helm:
       values: |-
         nodeSelector:
-          bgp-policy: a
+          kubernetes.io/hostname: adele
         persistence:
           media:
             enabled: true
