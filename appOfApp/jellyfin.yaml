@@ -16,11 +16,6 @@ spec:
             size: 1400Gi
             existingClaim: jellyfin-media
             type: pvc
-          config:
-            enabled: true
-            size: 5Gi
-            existingClaim: jellyfin-config
-            type: pvc
         ingress:
           enabled: true
           className: cilium
