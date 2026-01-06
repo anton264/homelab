@@ -19,7 +19,16 @@ sudo mkdir -p /etc/rancher/k3s/config.yaml.d
 echo -e "disable:\n  - traefik" | sudo tee /etc/rancher/k3s/config.yaml.d/traefik.yaml > /dev/null
 export API_SERVER_IP=10.1.1.10
 export API_SERVER_PORT=6443
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC='--flannel-backend=none --disable-network-policy --disable-kube-proxy --disable servicelb' sh -
+sudo mkdir -p /etc/rancher/k3s
+sudo tee /etc/rancher/k3s/config.yaml > /dev/null <<EOF
+flannel-backend: "none"
+disable-network-policy: true
+disable-kube-proxy: true
+disable:
+  - servicelb
+  - traefik
+EOF
+curl -sfL https://get.k3s.io | sh -
 sudo cp /etc/rancher/k3s/k3s.yaml $HOME/k3s.yaml
 sudo chown $(whoami) $HOME/k3s.yaml
 cp $HOME/k3s.yaml $HOME/.kube/config
@@ -45,6 +54,8 @@ done
 kubectl -n externaldns get configmap public-ip-config -o jsonpath={.data.public-ip}
 
 kubectl create ns renovate
+kubectl create ns jellyfin
+
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Secret
