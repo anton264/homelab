@@ -21,8 +21,7 @@ spec:
           runAsUser: 1000
           runAsGroup: 1000
           # getent group render | cut -d: -f3
-          supplementalGroups: 
-            - 105
+          supplementalGroups: [105]
           privileged: true
         nodeSelector:
           kubernetes.io/hostname: adele
