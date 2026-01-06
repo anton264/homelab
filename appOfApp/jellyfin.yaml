@@ -10,6 +10,8 @@ spec:
     targetRevision: 2.7.0
     helm:
       values: |-
+        nodeSelector:
+          bgp-policy: a
         persistence:
           media:
             enabled: true
