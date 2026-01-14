@@ -13,7 +13,7 @@ jobs:
     runs-on: arc-runner-set-renovate
     container:
       image: ghcr.io/renovatebot/renovate:full
-      options: --user root
+      options: --user 0
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.1
