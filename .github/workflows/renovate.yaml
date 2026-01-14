@@ -9,9 +9,16 @@ on:
 
 jobs:
   renovate:
-    environment: ${{ github.event.inputs.environment }}
+    environment: ${{ inputs.environment }}
     runs-on: arc-runner-set-renovate
     steps:
+      - name: Debug Secret Visibility
+        run: |
+          if [ -z "${{ secrets.GITHUBCOMTOKEN }}" ]; then
+            echo "GITHUBCOMTOKEN is NOT visible"
+          else
+            echo "GITHUBCOMTOKEN is visible"
+          fi
       - name: Checkout
         uses: actions/checkout@v6.0.1
       - name: Self-hosted Renovate
