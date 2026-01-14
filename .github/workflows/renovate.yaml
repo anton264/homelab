@@ -28,4 +28,5 @@ jobs:
         env:
           GITHUB_COM_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
           RENOVATE_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
+          RENOVATE_GITHUB_COM_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
           LOG_LEVEL: debug
