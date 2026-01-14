@@ -12,31 +12,11 @@ jobs:
     environment: ${{ inputs.environment }}
     runs-on: arc-runner-set-renovate
     steps:
-      - name: Debug Secret Visibility
-        run: |
-          if [ -z "${{ secrets.GITHUBCOMTOKEN }}" ]; then
-            echo "GITHUBCOMTOKEN is NOT visible"
-          else
-            echo "GITHUBCOMTOKEN is visible"
-          fi
-        env:
-          GITHUB_COM_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
-          RENOVATE_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
-          RENOVATE_GITHUB_COM_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
-          LOG_LEVEL: debug
       - name: Checkout
         uses: actions/checkout@v6.0.1
-        env:
-          GITHUB_COM_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
-          RENOVATE_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
-          RENOVATE_GITHUB_COM_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
-          LOG_LEVEL: debug        
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v44.2.3
         with:
+          docker-cmd-file: .github/renovate-entrypoint.sh
+          docker-user: root
           token: ${{ secrets.GITHUBCOMTOKEN }}
-        env:
-          GITHUB_COM_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
-          RENOVATE_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
-          RENOVATE_GITHUB_COM_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
-          LOG_LEVEL: debug
