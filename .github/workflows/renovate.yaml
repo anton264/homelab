@@ -11,6 +11,8 @@ jobs:
   renovate:
     environment: ${{ inputs.environment }}
     runs-on: arc-runner-set-renovate
+    container:
+      image: ghcr.io/renovatebot/renovate:full
     steps:
       - name: Checkout
         uses: actions/checkout@v6.0.1
@@ -18,4 +20,5 @@ jobs:
         uses: renovatebot/github-action@v44.2.3
         with:
           renovate-image: ghcr.io/renovatebot/renovate:full
+          configurationFile: example/renovate-config.js
           token: ${{ secrets.GITHUBCOMTOKEN }}
