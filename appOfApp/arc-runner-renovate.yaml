@@ -25,6 +25,9 @@ spec:
                 image: ghcr.io/renovatebot/renovate:full
                 # No 'command' override is usually needed for the -full image 
                 # as it defaults to the runner startup script.
+                env:
+                  - name: RENOVATE_TOKEN
+                    value: placeholder
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: arc-runners
