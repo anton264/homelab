@@ -9,6 +9,7 @@ on:
 
 jobs:
   renovate:
+    environment: ${{ github.event.inputs.environment }}
     runs-on: arc-runner-set-renovate
     steps:
       - name: Checkout
