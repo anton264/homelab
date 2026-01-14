@@ -9,7 +9,7 @@ spec:
     repoURL: 'oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set'
     targetRevision: 0.13.1
     chart: gha-runner-scale-set
-    helm:
+helm:
       values: |
         githubConfigUrl: "https://github.com/240snusn"
         githubConfigSecret: "pre-defined-secret"
@@ -21,9 +21,10 @@ spec:
             serviceAccountName: "secret-creator-sa"
             containers:
               - name: runner
-                # Using the Renovate full image which includes Node and the CLI
-                image: ghcr.io/renovatebot/renovate:39.106.0
-                command: ["/home/runner/run.sh"]
+                # Use the 'full' tag which is designed for GitHub Actions Runners
+                image: ghcr.io/renovatebot/renovate:39.106.0-full
+                # No 'command' override is usually needed for the -full image 
+                # as it defaults to the runner startup script.
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: arc-runners
