@@ -9,7 +9,7 @@ spec:
     repoURL: 'oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set'
     targetRevision: 0.13.1
     chart: gha-runner-scale-set
-helm:
+    helm:
       values: |
         githubConfigUrl: "https://github.com/240snusn"
         githubConfigSecret: "pre-defined-secret"
