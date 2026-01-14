@@ -19,3 +19,4 @@ jobs:
           token: ${{ secrets.GITHUBCOMTOKEN }}
         env:
           GITHUB_COM_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
+          RENOVATE_TOKEN: ${{ secrets.GITHUBCOMTOKEN }}
