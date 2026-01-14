@@ -20,5 +20,6 @@ jobs:
         uses: renovatebot/github-action@v44.2.3
         with:
           renovate-image: ghcr.io/renovatebot/renovate:full
-          configurationFile: example/renovate-config.js
+          configurationFile: renovate-config.js
+          docker-user: root
           token: ${{ secrets.GITHUBCOMTOKEN }}
