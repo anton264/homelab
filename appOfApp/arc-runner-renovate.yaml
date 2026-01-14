@@ -22,7 +22,7 @@ spec:
             containers:
               - name: runner
                 # Use the 'full' tag which is designed for GitHub Actions Runners
-                image: ghcr.io/renovatebot/renovate:39.106.0-full
+                image: ghcr.io/renovatebot/renovate:full
                 # No 'command' override is usually needed for the -full image 
                 # as it defaults to the runner startup script.
   destination:
