@@ -19,3 +19,4 @@ jobs:
         with:
           renovate-image: ghcr.io/renovatebot/renovate:full
           token: ${{ secrets.GITHUBCOMTOKEN }}
+          

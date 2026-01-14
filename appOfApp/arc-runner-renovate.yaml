@@ -13,21 +13,30 @@ spec:
       values: |
         githubConfigUrl: "https://github.com/240snusn"
         githubConfigSecret: "pre-defined-secret"
+        containerMode:
+          type: kubernetes
+          kubernetesModeWorkVolumeClaim:
+            accessModes: ["ReadWriteOnce"]
+            # For local testing, use https://github.com/openebs/dynamic-localpv-provisioner/blob/develop/docs/quickstart.md to provide dynamic provision volume with storageClassName: openebs-hostpath
+            storageClassName: "dynamic-blob-storage"
+            resources:
+              requests:
+                storage: 1Gi
         controllerServiceAccount:
           namespace: "arc-systems"
           name: "gha-runner-scale-set-controller-gha-rs-controller"
         template:
           spec:
             serviceAccountName: "secret-creator-sa"
-            containers:
-              - name: runner
-                # Use the 'full' tag which is designed for GitHub Actions Runners
-                image: ghcr.io/renovatebot/renovate:full
-                # No 'command' override is usually needed for the -full image 
-                # as it defaults to the runner startup script.
-                env:
-                  - name: RENOVATE_TOKEN
-                    value: placeholder
+            # containers:
+            #   - name: runner
+            #     # Use the 'full' tag which is designed for GitHub Actions Runners
+            #     image: ghcr.io/renovatebot/renovate:full
+            #     # No 'command' override is usually needed for the -full image 
+            #     # as it defaults to the runner startup script.
+            #     env:
+            #       - name: RENOVATE_TOKEN
+            #         value: placeholder
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: arc-runners
