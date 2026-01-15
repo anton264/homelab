@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: transmission
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'oci://ghcr.io/lexfrei/charts/transmission'
+    targetRevision: 1.7.0
+    chart: transmission
+    helm:
+      values: |-
+        env:
+          TZ: Europe/Stockholm
+          PUID: "1001"
+          PGID: "1001"
+        ingress:
+          enabled: true
+          className: cilium
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-prod
+          hosts:
+            - host: transmission.kallhall.cc
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - secretName: transmission-tls
+              hosts:
+                - transmission.kallhall.cc
+        persistence:
+          downloads:
+            enabled: true
+            type: pvc
+            existingClaim: jellyfin-media
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: jellyfin
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
