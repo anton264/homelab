@@ -14,17 +14,15 @@ spec:
         ingress:
           enabled: true
           className: cilium
-          annotations:
-            cert-manager.io/cluster-issuer: letsencrypt-prod
           hosts:
-            - host: zammad.kallhall.cc
+            - host: zammad.kallhall.lan
               paths:
                 - path: /
                   pathType: Prefix
           tls:
             - secretName: zammad-tls
               hosts:
-                - zammad.kallhall.cc
+                - zammad.kallhall.lan
   destination:
     server: https://kubernetes.default.svc
     namespace: zammad
