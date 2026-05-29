@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zammad
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://zammad.github.io/zammad-helm
+    targetRevision: 16.2.1
+    chart: zammad
+    helm:
+      values: |-
+        ingress:
+          enabled: true
+          className: cilium
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt-prod
+          hosts:
+            - host: zammad.kallhall.cc
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - secretName: zammad-tls
+              hosts:
+                - zammad.kallhall.cc
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: zammad
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

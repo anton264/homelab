@@ -20,5 +20,5 @@ jobs:
       - name: Self-hosted Renovate
         uses: renovatebot/github-action@v44.2.3
         with:
-          renovate-image: ghcr.io/renovatebot/renovate:full
+          renovate-image: ghcr.io/renovatebot/renovate:default
           token: ${{ secrets.GITHUBCOMTOKEN }}
