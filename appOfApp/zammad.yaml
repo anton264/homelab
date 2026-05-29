@@ -19,10 +19,6 @@ spec:
               paths:
                 - path: /
                   pathType: Prefix
-          tls:
-            - secretName: zammad-tls
-              hosts:
-                - zammad.kallhall.lan
   destination:
     server: https://kubernetes.default.svc
     namespace: zammad
